@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin SKUs — Dispo iPhone</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>.container{max-width:720px}.field{display:grid;gap:6px}.token{font-family:ui-monospace,Menlo,Consolas,monospace}</style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Admin — Ajouter un SKU Apple (DEV)</h1>
+      <p class="muted">Protégé par un token (environnement <code class="token">DEV_TOKEN</code>). Pour usage local.</p>
+      <div class="form" id="form">
+        <div class="field"><label>Modèle</label><input id="model" placeholder="iPhone 16 Pro"></div>
+        <div class="field"><label>Capacité</label><input id="capacity" placeholder="256 Go"></div>
+        <div class="field"><label>Couleur</label><input id="color" placeholder="Titane naturel"></div>
+        <div class="field"><label>Part number Apple</label><input id="partNumber" placeholder="MTXXXXZD/A"></div>
+        <div class="field"><label>DEV_TOKEN</label><input id="token" placeholder="changeme"></div>
+        <div class="form__actions"><button class="btn" id="btn">Ajouter</button></div>
+        <p id="out" class="muted"></p>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.getElementById('btn').addEventListener('click', async () => {
+      const body = { model: model.value.trim(), capacity: capacity.value.trim(), color: color.value.trim(), partNumber: partNumber.value.trim() };
+      const r = await fetch('/api/_dev/add-sku', { method:'POST', headers:{ 'Content-Type':'application/json', 'x-dev-token': token.value.trim() }, body: JSON.stringify(body) });
+      const j = await r.json();
+      out.textContent = j.ok ? '✓ Ajouté' : '⚠️ ' + (j.error || 'Erreur');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dispo iPhone — Checker</title>
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="header">
+  <div class="header__brand">
+    <svg aria-hidden="true" viewBox="0 0 24 24" class="logo"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v7a5 5 0 0 0 5 5h6a5 5 0 0 0 5-5v-7a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4zm-2 6V6a2 2 0 1 1 4 0v2h-4z"/></svg>
+    <span class="brand">Dispo iPhone</span>
+  </div>
+</header>
+<main class="container">
+  <section class="intro">
+    <h1>Vérifie la dispo près de toi</h1>
+    <p class="muted">Zéro pub. Rapide. Accessible.</p>
+  </section>
+
+  <form id="checkerForm" class="card form" novalidate>
+    <div class="form__row">
+      <div class="field"><label for="model">Modèle *</label><select id="model" required></select><p class="error" id="err-model"></p></div>
+      <div class="field"><label for="capacity">Capacité *</label><select id="capacity" required></select><p class="error" id="err-capacity"></p></div>
+      <div class="field"><label for="color">Couleur *</label><select id="color" required></select><p class="error" id="err-color"></p></div>
+    </div>
+    <div class="form__row">
+      <div class="field">
+        <label for="postal">Code postal *</label>
+        <input id="postal" inputmode="numeric" pattern="\d{4,5}" placeholder="75001" required />
+        <small class="hint">5 chiffres (4 pour certains territoires).</small>
+        <p class="error" id="err-postal"></p>
+      </div>
+      <div class="field">
+        <label for="operator">Opérateur</label>
+        <select id="operator"></select>
+      </div>
+      <div class="field field--inline">
+        <input type="checkbox" id="onlyAvailable" /><label for="onlyAvailable">Uniquement en stock</label>
+      </div>
+    </div>
+    <div class="form__actions">
+      <button type="submit" class="btn" id="submitBtn"><span>Vérifier</span><span class="btn__spinner" aria-hidden="true"></span></button>
+      <button type="reset" class="btn btn--ghost">Réinitialiser</button>
+    </div>
+  </form>
+
+  <section class="results card">
+    <div class="results__header">
+      <h2>Résultats</h2><div class="pill" id="resultsBadge">—</div>
+    </div>
+    <div class="results__tablewrap">
+      <table class="table" id="resultsTable"><thead><tr><th>Magasin</th><th>Ville</th><th>Distance</th><th>Disponibilité</th><th>Retrait</th></tr></thead><tbody></tbody></table>
+      <div id="skeleton" class="skeleton" hidden><div class="skeleton__row"></div><div class="skeleton__row"></div><div class="skeleton__row"></div></div>
+    </div>
+    <p class="muted" id="resultsNote">Les résultats s’affichent ici.</p>
+  </section>
+</main>
+<footer class="footer"><small>© 2025 Dispo iPhone. Zéro pub.</small></footer>
+<script defer src="app.js"></script>
+</body>
+</html>

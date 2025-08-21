@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "country": "fr",
+    "note": "Remplir avec les vrais part numbers (suffixe ZD/A) récupérés dans l'XHR 'fulfillment-messages' sur apple.com/fr."
+  },
+  "products": [
+    { "model":"iPhone 16", "capacity":"128 Go", "color":"Noir", "partNumber":["REPLACE_ZD/A"] },
+    { "model":"iPhone 16 Plus", "capacity":"256 Go", "color":"Bleu", "partNumber":["REPLACE_ZD/A"] },
+    { "model":"iPhone 16 Pro", "capacity":"256 Go", "color":"Titane naturel", "partNumber":["REPLACE_ZD/A"] },
+    { "model":"iPhone 16 Pro", "capacity":"256 Go", "color":"Titane noir", "partNumber":["REPLACE_ZD/A"] },
+    { "model":"iPhone 16 Pro Max", "capacity":"256 Go", "color":"Titane désert", "partNumber":["REPLACE_ZD/A"] }
+  ]
+}
