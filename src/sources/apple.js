@@ -15,7 +15,8 @@ export async function fetchPickupForParts({ parts, postal, country=process.env.A
     headers: {
       'Accept':'application/json, text/javascript, */*; q=0.01',
       'User-Agent':'Mozilla/5.0 (compatible; Dispo-iPhone/1.0)',
-      'Accept-Language':'fr-FR,fr;q=0.9'
+      'Accept-Language':'fr-FR,fr;q=0.9',
+      'X-Requested-With':'XMLHttpRequest'
     }
   });
   if(!resp.ok) throw new Error(`Apple fulfillment fetch failed: ${resp.status}`);
@@ -23,23 +24,35 @@ export async function fetchPickupForParts({ parts, postal, country=process.env.A
 }
 export function normalizeFulfillment(json){
   const stores=(json?.body?.content?.pickupMessage?.stores)||[];
-  return stores.map(s=>{
-    const anyAvail = Object.values(s.partsAvailability||{}).some(p=>{
-      const d = p?.pickupDisplay;
-      return d==='available' || d==='inStock' || d==='availableForPickup';
+  const sanitized = stores.map(s=>{
+    const pa = s.partsAvailability || {};
+    const anyAvail = Object.values(pa).some(p=>{
+      const d = (p?.pickupDisplay||'').toLowerCase();
+      return d.includes('available') || d.includes('in stock') || d.includes('disponible');
     });
-    const one = Object.values(s.partsAvailability||{})[0] || {};
+    const one = Object.values(pa)[0] || {};
     const pickup = one?.storePickupQuote || one?.pickupSearchQuote || '—';
+    let distanceKm = null;
+    if (s.storeDistanceWithUnit) {
+      const num = String(s.storeDistanceWithUnit).replace(',', '.').match(/([\d.]+)/);
+      distanceKm = num ? parseFloat(num[1]) : null;
+    }
+    if (distanceKm==null) {
+      const raw = s.storetownDistance ?? s.distance ?? s.distanceWithUnit;
+      const num = String(raw||'').replace(',', '.').match(/([\d.]+)/);
+      distanceKm = num ? parseFloat(num[1]) : 0;
+    }
     let status='no';
     if (anyAvail) status='ok';
-    else if (Object.values(s.partsAvailability||{}).some(p => String(p?.pickupDisplay||'').includes('soon'))) status='soon';
+    else if (Object.values(pa).some(p => String(p?.pickupDisplay||'').toLowerCase().includes('soon') || String(p?.pickupSearchQuote||'').toLowerCase().includes('bientôt'))) status='soon';
     return {
       name: s.storeName || s.address?.address || 'Apple Store',
       city: s.city || s.address?.city || '',
       cp: s.address?.postalCode || '',
-      distanceKm: s.storetownDistance || s.distance || 0,
+      distanceKm,
       pickup,
       status
     };
   });
+  return sanitized.sort((a,b)=> (a.distanceKm||9999)-(b.distanceKm||9999));
 }
