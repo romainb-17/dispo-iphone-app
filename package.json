@@ -5,12 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "worker": "node src/services/worker.js"
   },
   "dependencies": {
+    "bullmq": "^5.58.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "express": "^4.19.2",
-    "express-rate-limit": "^7.3.1"
+    "express-rate-limit": "^7.3.1",
+    "ioredis": "^5.7.0",
+    "nodemailer": "^7.0.5"
   }
 }
