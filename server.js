@@ -1,15 +1,18 @@
-// server.js
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
+const express = require("express");
+const path = require("path");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, "dist")));
-app.get("/api/health", (req, res) => res.json({ status: "ok" }));
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "dist/index.html")));
+const staticDir = path.join(process.cwd(), process.env.STATIC_DIR || "public");
+console.log("👉 Serving from", staticDir);
 
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+app.use(express.static(staticDir));
+
+app.get("/healthz", (req, res) => res.send("ok"));
+
+app.get("*", (req, res) =>
+  res.sendFile(path.join(staticDir, "index.html"))
+);
+
+app.listen(PORT, () => console.log(`✅ Listening on :${PORT}`));

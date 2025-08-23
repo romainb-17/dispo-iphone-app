@@ -1,25 +1,12 @@
 {
   "name": "dispo-iphone-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "type": "module",
+  "engines": { "node": ">=18.18.0" },
   "scripts": {
-    "dev": "node server.js",
-    "build": "vite build",
-    "preview": "vite preview --strictPort",
-    "start": "node server.js",
-    "worker": "node src/services/worker.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "bullmq": "^5.58.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.6.1",
-    "express": "^4.19.2",
-    "express-rate-limit": "^7.3.1",
-    "ioredis": "^5.7.0",
-    "nodemailer": "^7.0.5"
-  },
-  "engines": {
-    "node": "20.x"
+    "express": "^4.19.2"
   }
 }
