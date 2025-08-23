@@ -2,9 +2,7 @@
   "name": "dispo-iphone-app",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": ">=18.18.0"
-  },
+  "engines": { "node": ">=18.18.0" },
   "scripts": {
     "start": "node server.js"
   },
