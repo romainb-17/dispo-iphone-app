@@ -6,7 +6,8 @@
     "node": ">=18.18.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "echo no build"
   },
   "dependencies": {
     "express": "^4.21.2"
