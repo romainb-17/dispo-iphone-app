@@ -8,24 +8,35 @@
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:24px}
     header{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
     h1{font-size:20px;margin:0}
-    .row{display:flex;gap:8px;flex-wrap:wrap}
-    input,button,select{padding:8px 10px;border:1px solid #ddd;border-radius:10px}
+    .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+    select,input,button{padding:8px 10px;border:1px solid #ddd;border-radius:10px}
+    button{cursor:pointer}
     table{width:100%;border-collapse:separate;border-spacing:0;margin-top:12px}
     th,td{padding:10px 12px;border-bottom:1px solid #eee;text-align:left}
     tr:hover{background:#fafafa}
     .ok{color:#0a7d00;font-weight:600}
     .ko{color:#b00020;font-weight:600}
+    .muted{color:#666}
     .sku{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
   </style>
 </head>
 <body>
-  <header>
-    <h1>📦 Dispo iPhone (Apple Stores)</h1>
-  </header>
+  <header><h1>📦 Dispo iPhone (Apple Stores)</h1></header>
+
   <div class="row">
-    <label>SKUs FR (virgules)
-      <input id="skus" size="60" placeholder="ex: MTUU3ZD/A, MTUV3ZD/A" value="MTUU3ZD/A, MTUV3ZD/A">
+    <label>Modèle
+      <select id="model"><option value="">— choisir —</option></select>
     </label>
+    <label>Couleur
+      <select id="color" disabled><option value="">— choisir —</option></select>
+    </label>
+    <label>Capacité
+      <select id="capacity" disabled><option value="">— choisir —</option></select>
+    </label>
+    <span class="muted">SKU: <span id="sku" class="sku">(aucun)</span></span>
+  </div>
+
+  <div class="row">
     <label>Pays
       <select id="country"><option>fr</option><option>be</option><option>ch</option><option>es</option><option>de</option><option>uk</option><option>us</option></select>
     </label>
@@ -43,7 +54,7 @@
     <tbody id="tbody"></tbody>
   </table>
 
-  <footer><a href="/healthz" target="_blank">/healthz</a> doit répondre <em>ok</em>.</footer>
-  <script src="./real.js"></script>
+  <footer style="margin-top:12px"><a href="/healthz" target="_blank">/healthz</a> doit répondre <em>ok</em>.</footer>
+  <script src="./app.js" type="module"></script>
 </body>
 </html>
