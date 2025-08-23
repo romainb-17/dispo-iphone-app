@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
+    "build": "vite build",
+    "preview": "vite preview --strictPort",
     "start": "node server.js",
     "worker": "node src/services/worker.js"
   },
@@ -16,5 +18,8 @@
     "express-rate-limit": "^7.3.1",
     "ioredis": "^5.7.0",
     "nodemailer": "^7.0.5"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

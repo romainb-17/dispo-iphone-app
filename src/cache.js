@@ -1,12 +1,28 @@
-import IORedis from 'ioredis';
-const url = process.env.REDIS_URL || 'redis://localhost:6379';
-export const redis = new IORedis(url, { lazyConnect: true });
-export async function connectRedis(){ if (redis.status==='end' || redis.status==='wait') { await redis.connect(); } return redis; }
-export async function cachedJSON(key, ttlSec, producer){
-  const r = await connectRedis();
-  const hit = await r.get(key);
-  if (hit) { try { return JSON.parse(hit); } catch {} }
-  const val = await producer();
-  if (val !== undefined) await r.set(key, JSON.stringify(val), 'EX', ttlSec);
-  return val;
+// src/cache.js
+const NS = 'dispo-cache-v1';
+
+const hasWindow = typeof window !== 'undefined';
+const hasLocalStorage = hasWindow && typeof window.localStorage !== 'undefined';
+
+function keyFor(sku, cp) {
+  return `${NS}:${sku || 'all'}:${cp || 'noCP'}`;
+}
+
+export function getCache(sku, cp) {
+  if (!hasLocalStorage) return null;
+  try {
+    const raw = window.localStorage.getItem(keyFor(sku, cp));
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+export function setCache(sku, cp, data) {
+  if (!hasLocalStorage) return;
+  try {
+    window.localStorage.setItem(keyFor(sku, cp), JSON.stringify({ data, ts: Date.now() }));
+  } catch {}
+}
+
+export function isFresh(entry, maxAgeMs = 5 * 60 * 1000) {
+  return entry && typeof entry.ts === 'number' && (Date.now() - entry.ts) < maxAgeMs;
 }
