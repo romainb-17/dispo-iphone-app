@@ -39,7 +39,7 @@ app.get('/api/availability', async (req, res) => {
     if (location) qs.set('location', location);
     const url = `${base}?${qs.toString()}`;
 
-    const r = await fetch(url, { headers: { 'accept':'application/json', 'cache-control':'no-cache', 'user-agent':'Mozilla/5.0 dispo-iphone-app' }});
+    const r = await fetch(url, { headers: { 'accept':'application/json', 'cache-control':'no-cache', 'user-agent':'Mozilla/5.0 radardispo' }});
     if (!r.ok) return res.status(502).json({ error:'apple_upstream', status:r.status, body: (await r.text()).slice(0,300) });
     const payload = await r.json();
     const stores = payload?.body?.content?.pickupMessage?.stores || [];

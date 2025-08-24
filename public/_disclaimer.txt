@@ -1,0 +1,3 @@
+<p style="margin-top:8px;color:#666;font-size:12px">
+  Projet non affilié à Apple. “Apple”, “iPhone” et autres marques citées appartiennent à leurs propriétaires.
+</p>
