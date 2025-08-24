@@ -12,22 +12,20 @@ function pickStaticDir() {
   }
   return 'public';
 }
-const chosen = pickStaticDir();
-const staticDir = path.join(process.cwd(), chosen);
+
+const staticDir = path.join(process.cwd(), pickStaticDir());
 console.log('👉 Serving from', staticDir);
 
 app.use(express.json());
 app.use(express.static(staticDir));
-
-// Health
 app.get('/healthz', (req, res) => res.status(200).send('ok'));
 
-// Données réelles Apple (non officiel): fulfillment-messages
+// Données réelles via Apple (non officiel)
 app.get('/api/availability', async (req, res) => {
   try {
-    const country = (req.query.country || 'fr').toString().toLowerCase();
-    const location = (req.query.location || '').toString();   // CP/ville ou lat,long
-    const store    = (req.query.store || '').toString();      // Rxxx optionnel
+    const country  = (req.query.country  || 'fr').toString().toLowerCase();
+    const location = (req.query.location || '').toString();
+    const store    = (req.query.store    || '').toString();
     const skus = (req.query.skus || '').toString().split(',').map(s=>s.trim()).filter(Boolean);
     if (!skus.length) return res.status(400).json({ error: 'missing skus' });
     if (!location && !store) return res.status(400).json({ error: 'missing location or store' });
@@ -39,7 +37,7 @@ app.get('/api/availability', async (req, res) => {
     if (location) qs.set('location', location);
     const url = `${base}?${qs.toString()}`;
 
-    const r = await fetch(url, { headers: { 'accept':'application/json', 'cache-control':'no-cache', 'user-agent':'Mozilla/5.0 dispo-iphone-app' }});
+    const r = await fetch(url, { headers: { 'accept':'application/json','cache-control':'no-cache','user-agent':'Mozilla/5.0 dispo-iphone-app' } });
     if (!r.ok) return res.status(502).json({ error:'apple_upstream', status:r.status, body: (await r.text()).slice(0,300) });
     const payload = await r.json();
     const stores = payload?.body?.content?.pickupMessage?.stores || [];
@@ -58,13 +56,14 @@ app.get('/api/availability', async (req, res) => {
         })
       };
     });
+
     res.json({ ok:true, count: results.length, results });
-  } catch (e) {
-    res.status(500).json({ error:'server_error', details: String(e?.message||e) });
+  } catch(e) {
+    res.status(500).json({ error:'server_error', details: String(e?.message||e) })
   }
 });
 
-// Fallback SPA
+// SPA fallback
 app.get('*', (req, res, next) => {
   if (req.method !== 'GET') return next();
   res.sendFile(path.join(staticDir, 'index.html'), err => err && next(err));
