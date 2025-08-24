@@ -7,48 +7,43 @@
   <link rel="stylesheet" href="/styles.css?v=1">
   <meta name="color-scheme" content="light dark">
   <style>
-    .chip{display:inline-block;padding:.15rem .5rem;border:1px solid var(--border);border-radius:999px;font-size:12px}
-    .up{color:var(--ok);border-color:var(--ok)}
-    .down{color:var(--ko);border-color:var(--ko)}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:24px}
+    .card{max-width:1100px;margin:auto;padding:16px;border:1px solid #e5e7eb;border-radius:14px}
+    .table-wrap{overflow:auto;border:1px solid #e5e7eb;border-radius:10px;margin-top:12px}
+    table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
+    th,td{padding:10px 12px;border-bottom:1px solid #e5e7eb;text-align:left}
+    .sku{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .chip{display:inline-block;padding:.15rem .5rem;border:1px solid #ddd;border-radius:999px;font-size:12px}
+    .up{color:#16a34a;border-color:#16a34a}
+    .down{color:#dc2626;border-color:#dc2626}
+    .muted{color:#666}
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="brand"><h1 style="margin:0;font-size:20px">🕒 Derniers événements</h1><span class="badge">50 récents</span></div>
-      <div class="toolbar"><a href="/" class="chip">← Retour</a></div>
+  <div class="card">
+    <h1 style="margin:0 0 8px">🕒 Derniers événements (50)</h1>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Store</th><th>Ville</th><th>SKU</th><th>État</th><th>Quote</th></tr></thead>
+        <tbody id="ev"><tr><td colspan="6" class="muted">Chargement…</td></tr></tbody>
+      </table>
     </div>
-
-    <div class="card">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Date/heure</th><th>Store</th><th>Ville</th><th>SKU</th><th>Changement</th><th>Quote</th></tr></thead>
-          <tbody id="ev"></tbody>
-        </table>
-      </div>
-      <footer>Actualisation auto chaque minute.</footer>
-    </div>
+    <p class="muted">Actualisation automatique chaque minute.</p>
   </div>
   <script>
     const tb=document.getElementById('ev');
-    function fmt(d){ try{ return new Date(d).toLocaleString('fr-FR'); }catch{ return d; } }
-    function row(e){
-      const up = e.to==='available';
-      const badge = up ? '<span class="chip up">en stock</span>' : '<span class="chip down">plus en stock</span>';
-      return `<tr>
-        <td>${fmt(e.ts)}</td>
-        <td>${e.storeName||''}</td>
-        <td>${e.city||''}</td>
-        <td class="sku">${e.sku||''}</td>
-        <td>${e.from||'?'} → ${e.to||'?'} ${badge}</td>
-        <td>${e.quote||''}</td>
-      </tr>`;
-    }
+    const fmt=(d)=>{ try{return new Date(d).toLocaleString('fr-FR');}catch{return d;} };
+    const row=(e)=>\`<tr>
+      <td>\${fmt(e.ts)}</td><td>\${e.storeName||''}</td><td>\${e.city||''}</td>
+      <td class="sku">\${e.sku||''}</td>
+      <td>\${e.from||'?'} → \${e.to||'?'} \${e.to==='available' ? '<span class="chip up">en stock</span>' : '<span class="chip down">plus en stock</span>'}</td>
+      <td>\${e.quote||''}</td>
+    </tr>\`;
     async function load(){
       try{
-        const r = await fetch('/api/events?limit=50',{cache:'no-store'});
+        const r = await fetch('/api/events?limit=50', { cache:'no-store' });
         const j = await r.json();
-        tb.innerHTML = (j.events||[]).map(row).join('') || '<tr><td colspan="6" class="muted">Aucun événement encore. Laisse tourner 1-2 minutes…</td></tr>';
+        tb.innerHTML = (j.events||[]).map(row).join('') || '<tr><td colspan="6" class="muted">Aucun événement pour l’instant…</td></tr>';
       }catch(e){ tb.innerHTML = '<tr><td colspan="6">Erreur réseau</td></tr>'; }
     }
     load(); setInterval(load, 60000);
