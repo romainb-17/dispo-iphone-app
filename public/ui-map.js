@@ -1,32 +1,23 @@
 const $ = (s)=>document.querySelector(s);
 const tb = $('#tbody');
-
-function setTB(html){ if(tb){ tb.innerHTML = html; } }
+const setTB = (html)=>{ if(tb) tb.innerHTML = html; };
 
 async function ensureLeaflet(){
   if (window.L) return;
-  const add = (tag, attrs) => { const el=document.createElement(tag); Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v)); document.head.appendChild(el); return el; };
+  const add = (tag, attrs) => { const el=document.createElement(tag); for(const[k,v] of Object.entries(attrs)) el.setAttribute(k,v); document.head.appendChild(el); return el; };
   if (!document.querySelector('link[href*="leaflet.css"]')) add('link',{rel:'stylesheet',href:'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'});
   await new Promise((resolve)=>{
     const s1 = add('script',{src:'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'});
     s1.onload = resolve;
-    s1.onerror = ()=>{
-      const s2 = add('script',{src:'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js'});
-      s2.onload = resolve;
-    };
+    s1.onerror = ()=>{ const s2 = add('script',{src:'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js'}); s2.onload = resolve; };
   });
 }
 
 function ensureMapDiv(){
   let el = document.getElementById('map');
   if (!el) {
-    el = document.createElement('div');
-    el.id = 'map';
-    el.style.height = '60vh';
-    el.style.minHeight = '420px';
-    el.style.width = '100%';
-    el.style.borderRadius = '12px';
-    el.style.overflow = 'hidden';
+    el = Object.assign(document.createElement('div'), {id:'map'});
+    el.style.cssText = 'height:60vh;min-height:420px;width:100%;border-radius:12px;overflow:hidden;position:relative';
     const anchor = document.querySelector('table') || document.body;
     (anchor.parentNode || document.body).insertBefore(el, anchor.nextSibling);
   }
@@ -49,16 +40,16 @@ function rowHtml(x){
 async function fetchAvailability({ country='fr', skus, storeCode, lat, lon }){
   if(!skus) return {ok:false,error:'no_skus'};
   const qs = new URLSearchParams({ country, skus });
-  if(storeCode){ qs.set('store', storeCode); }
-  else if(lat!=null && lon!=null){ qs.set('location', `${lat},${lon}`); }
-  else { return {ok:false,error:'no_location_or_store'}; }
+  if(storeCode) qs.set('store', storeCode);
+  else if(lat!=null && lon!=null) qs.set('location', `${lat},${lon}`);
+  else return {ok:false,error:'no_location_or_store'};
   const r = await fetch(`/api/availability?${qs.toString()}`);
   return await r.json();
 }
 
 async function fillTableForStore(store, country){
   const manual = $('#skus');
-  const skus = manual && manual.value.trim()
+  const skus = manual?.value?.trim()
     ? manual.value.split(',').map(s=>s.trim()).filter(Boolean).join(',')
     : (document.getElementById('sku')?.textContent||'').trim();
   if(!skus){ setTB('<tr><td colspan="6">⚠️ Ajoute un SKU (ou sélectionne via menus)</td></tr>'); return; }
@@ -79,13 +70,12 @@ async function fillTableForStore(store, country){
 }
 
 async function getStores(){
-  const url = 'apple-stores-fr.json'; // RELATIF
   try{
-    const r = await fetch(url, {cache:'no-store'});
-    if(!r.ok) throw new Error('stores_json_'+r.status);
+    const r = await fetch('apple-stores-fr.json',{cache:'no-store'});
+    if(!r.ok) throw 0;
     return await r.json();
-  } catch(e){
-    console.warn('Stores JSON introuvable, fallback minimal', e);
+  }catch(e){
+    console.warn('Stores JSON introuvable; fallback');
     return [
       {"name":"Apple Nantes Atlantis","city":"Saint-Herblain","lat":47.2131,"lon":-1.6339,"code":""},
       {"name":"Apple Bordeaux Sainte-Catherine","city":"Bordeaux","lat":44.8386,"lon":-0.5722,"code":""},
@@ -102,11 +92,9 @@ async function initMap(){
   const map = L.map('map', { zoomControl:true }).setView([46.6, 2.6], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{ attribution:'© OpenStreetMap' }).addTo(map);
 
-  // S'assure de la bonne taille d'affichage
   map.whenReady(()=> setTimeout(()=>map.invalidateSize(), 0));
   window.addEventListener('resize', ()=> map.invalidateSize());
 
-  // Icône explicite (pins visibles même si la CSS Leaflet est bloquée)
   const DefaultIcon = L.icon({
     iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
     iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -116,26 +104,27 @@ async function initMap(){
 
   const stores = await getStores();
   const layer = L.layerGroup().addTo(map);
-  const countrySel = $('#country');
-  const country = countrySel ? countrySel.value || 'fr' : 'fr';
+  const countrySel = document.querySelector('#country');
+  const country = countrySel?.value || 'fr';
 
   stores.forEach(s=>{
     const m = L.marker([s.lat, s.lon], {icon: DefaultIcon}).addTo(layer);
     const el = document.createElement('div');
+    el.innerHTML = `<b>${s.name}</b><br>${s.city}<br>`;
     const btn = document.createElement('button');
     btn.textContent = 'Voir le stock ici';
-    el.innerHTML = `<b>${s.name}</b><br>${s.city}<br>`;
     el.appendChild(btn);
     m.bindPopup(el);
     m.on('popupopen', ()=>{ btn.onclick = ()=> fillTableForStore(s, (countrySel?.value||country)); });
   });
 
-  const go = $('#go');
+  const go = document.querySelector('#go');
   if(go){
     go.addEventListener('click', async ()=>{
-      const skusInput = $('#skus'); const skus = skusInput?.value?.split(',').map(s=>s.trim()).filter(Boolean).join(',') || '';
+      const skusInput = document.querySelector('#skus');
+      const skus = skusInput?.value?.split(',').map(s=>s.trim()).filter(Boolean).join(',') || '';
       if(!skus){ setTB('<tr><td colspan="6">⚠️ Donne au moins un SKU</td></tr>'); return; }
-      const country = countrySel ? countrySel.value || 'fr' : 'fr';
+      const country = countrySel?.value || 'fr';
       const location = document.getElementById('location')?.value?.trim() || '';
       const store = document.getElementById('store')?.value?.trim() || '';
       if(!location && !store){ setTB('<tr><td colspan="6">⚠️ Clique un store sur la carte ou renseigne location/store.</td></tr>'); return; }
@@ -153,5 +142,4 @@ async function initMap(){
     });
   }
 }
-
 document.addEventListener('DOMContentLoaded', initMap);

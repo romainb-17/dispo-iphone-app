@@ -1,14 +1,27 @@
 document.addEventListener('DOMContentLoaded', async ()=>{
-  const sel = document.querySelector('#model, #modele, #product, select[name="model"]');
-  if(!sel) return;
-  if (sel.options && sel.options.length > 0) return; // déjà rempli par ton script
+  let sel = document.querySelector('#model, #modele, #product, select[name="model"]');
+
+  // si aucun select modèle, on le crée à côté de l’input SKUs
+  if(!sel){
+    const row = document.querySelector('.row') || document.body;
+    const lab = document.createElement('label');
+    lab.textContent = 'Modèle ';
+    sel = document.createElement('select');
+    sel.id = 'model';
+    sel.style.marginLeft = '6px';
+    lab.appendChild(sel);
+    row.appendChild(lab);
+  }
+
+  // déjà peuplé ? on ne touche pas
+  if (sel.options && sel.options.length > 0) return;
 
   async function tryJson(path){
     try{ const r = await fetch(path, {cache:'no-store'}); if(!r.ok) return null; return await r.json(); }
     catch(e){ return null; }
   }
 
-  // essaie de récupérer une liste locale si elle existe
+  // tente data locale
   let data = await tryJson('data/apple_fr_skus.json') || await tryJson('./data/apple_fr_skus.json');
 
   const options = [];
@@ -19,7 +32,6 @@ document.addEventListener('DOMContentLoaded', async ()=>{
       if (sku) options.push({label, sku});
     }
   }
-  // Fallback mini si aucun JSON dispo
   if (options.length === 0) {
     options.push({label:'iPhone 16 Pro 256 Go — exemple', sku:'MTUU3ZD/A'});
     options.push({label:'iPhone 16 Pro Max 256 Go — exemple', sku:'MTUV3ZD/A'});
@@ -33,11 +45,11 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     sel.appendChild(opt);
   }
 
-  // Lier au champ SKUs si présent
+  // synchronise avec l’input SKUs
   const skusInput = document.querySelector('#skus');
   if (skusInput) {
     const sync = ()=>{ skusInput.value = sel.value; };
     sel.addEventListener('change', sync);
-    sync();
+    if (!skusInput.value.trim()) sync();
   }
 });

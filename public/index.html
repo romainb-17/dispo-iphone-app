@@ -22,6 +22,11 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet.9.4/dist/leaflet.js"></script>
   <style id="map-fix-css">#map{height:60vh;min-height:420px;width:100%;border-radius:12px;overflow:hidden}</style>
+  <style id="leaflet-hotfix-css">
+    #map{height:60vh;min-height:420px;width:100%;border-radius:12px;overflow:hidden;position:relative}
+    .leaflet-container img{max-width:none !important;} /* neutralise img{max-width:100%} */
+    .leaflet-pane img.leaflet-tile{display:block}       /* évite les espaces entre tuiles     */
+  </style>
 </head>
 <body>
   <header><h1>📦 Dispo iPhone (Apple Stores)</h1></header>
