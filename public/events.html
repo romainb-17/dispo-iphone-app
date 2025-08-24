@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Derniers événements — Dispo iPhone</title>
+  <link rel="stylesheet" href="/styles.css?v=1">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    .chip{display:inline-block;padding:.15rem .5rem;border:1px solid var(--border);border-radius:999px;font-size:12px}
+    .up{color:var(--ok);border-color:var(--ok)}
+    .down{color:var(--ko);border-color:var(--ko)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand"><h1 style="margin:0;font-size:20px">🕒 Derniers événements</h1><span class="badge">50 récents</span></div>
+      <div class="toolbar"><a href="/" class="chip">← Retour</a></div>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date/heure</th><th>Store</th><th>Ville</th><th>SKU</th><th>Changement</th><th>Quote</th></tr></thead>
+          <tbody id="ev"></tbody>
+        </table>
+      </div>
+      <footer>Actualisation auto chaque minute.</footer>
+    </div>
+  </div>
+  <script>
+    const tb=document.getElementById('ev');
+    function fmt(d){ try{ return new Date(d).toLocaleString('fr-FR'); }catch{ return d; } }
+    function row(e){
+      const up = e.to==='available';
+      const badge = up ? '<span class="chip up">en stock</span>' : '<span class="chip down">plus en stock</span>';
+      return `<tr>
+        <td>${fmt(e.ts)}</td>
+        <td>${e.storeName||''}</td>
+        <td>${e.city||''}</td>
+        <td class="sku">${e.sku||''}</td>
+        <td>${e.from||'?'} → ${e.to||'?'} ${badge}</td>
+        <td>${e.quote||''}</td>
+      </tr>`;
+    }
+    async function load(){
+      try{
+        const r = await fetch('/api/events?limit=50',{cache:'no-store'});
+        const j = await r.json();
+        tb.innerHTML = (j.events||[]).map(row).join('') || '<tr><td colspan="6" class="muted">Aucun événement encore. Laisse tourner 1-2 minutes…</td></tr>';
+      }catch(e){ tb.innerHTML = '<tr><td colspan="6">Erreur réseau</td></tr>'; }
+    }
+    load(); setInterval(load, 60000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "everyMinutes": 1,
+  "monitors": [
+    {
+      "country": "fr",
+      "location": "75001",
+      "skus": [
+        "MYE73ZD/A",
+        "MYEE3ZD/A",
+        "MYEF3ZD/A",
+        "MYEG3ZD/A",
+        "MYED3ZD/A",
+        "MYEH3ZD/A",
+        "MYER3ZD/A",
+        "MYND3ZD/A",
+        "MYNH3ZD/A",
+        "MYNM3ZD/A",
+        "MYNE3ZD/A",
+        "MYNL3ZD/A"
+      ]
+    }
+  ]
+}
