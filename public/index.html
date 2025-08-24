@@ -1,47 +1,111 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Dispo iPhone — Apple Stores</title>
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:24px}
-    header{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
-    h1{font-size:20px;margin:0}
-    .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-    select,input,button{padding:8px 10px;border:1px solid #ddd;border-radius:10px}
-    table{width:100%;border-collapse:separate;border-spacing:0;margin-top:12px}
-    th,td{padding:10px 12px;border-bottom:1px solid #eee;text-align:left}
-    tr:hover{background:#fafafa}
-    .ok{color:#0a7d00;font-weight:600}.ko{color:#b00020;font-weight:600}
-    .muted{color:#666}.sku{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
-  </style>
+  <link rel="stylesheet" href="/styles.css?v=1">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    // Applique le thème avant paint (évite flash)
+    (function(){
+      const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null (auto)
+      if(saved==='light' || saved==='dark'){ document.documentElement.setAttribute('data-theme', saved); }
+      // sinon, on laisse le media-query décider (auto)
+    })();
+  </script>
 </head>
 <body>
-  <header><h1>📦 Dispo iPhone (menus déroulants, pas de carte)</h1></header>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <h1 style="margin:0;font-size:20px">📦 Dispo iPhone</h1>
+        <span class="badge">FR ZD/A</span>
+      </div>
+      <div class="toolbar">
+        <button id="themeToggle" class="theme-btn" aria-label="Basculer thème">
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 3a1 1 0 0 1 1 1v1.05a7 7 0 1 1-2 0V4a1 1 0 0 1 1-1zM4 13H3a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2zm17 0h-1a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2zM6.22 6.22a1 1 0 0 1 1.42 0l.74.74a1 1 0 1 1-1.42 1.42l-.74-.74a1 1 0 0 1 0-1.42zM15.62 15.62a1 1 0 0 1 1.42 0l.74.74a1 1 0 1 1-1.42 1.42l-.74-.74a1 1 0 0 1 0-1.42z"/>
+          </svg>
+          <span id="themeLabel">Auto</span>
+        </button>
+      </div>
+    </div>
 
-  <div class="row">
-    <label>Modèle <select id="model"><option value="">— choisir —</option></select></label>
-    <label>Couleur <select id="color" disabled><option value="">— choisir —</option></select></label>
-    <label>Capacité <select id="capacity" disabled><option value="">— choisir —</option></select></label>
-    <span class="muted">SKU: <span id="sku" class="sku">(aucun)</span></span>
+    <div class="card">
+      <div class="row">
+        <div>
+          <label>Modèle</label><br/>
+          <select id="model"><option value="">— choisir —</option></select>
+        </div>
+        <div>
+          <label>Couleur</label><br/>
+          <select id="color" disabled><option value="">— choisir —</option></select>
+        </div>
+        <div>
+          <label>Capacité</label><br/>
+          <select id="capacity" disabled><option value="">— choisir —</option></select>
+        </div>
+        <div style="align-self:end" class="muted">SKU : <span id="sku" class="sku">(aucun)</span></div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Pays</label><br/>
+          <select id="country"><option>fr</option><option>be</option><option>ch</option><option>es</option><option>de</option><option>uk</option><option>us</option></select>
+        </div>
+        <div>
+          <label>Localisation (CP/ville ou lat,long)</label><br/>
+          <input id="location" placeholder="17000 ou 48.85,2.35" value="17000"/>
+        </div>
+        <div>
+          <label>Store RXXX (optionnel)</label><br/>
+          <input id="store" placeholder="R123" style="min-width:100px"/>
+        </div>
+        <div style="align-self:end">
+          <button id="go" class="btn-primary">Rechercher</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Store</th><th>Ville</th><th>Distance</th><th>SKU</th><th>Dispo</th><th>Quote</th></tr></thead>
+          <tbody id="tbody"><tr><td colspan="6" class="muted">Sélectionne un modèle puis “Rechercher”.</td></tr></tbody>
+        </table>
+      </div>
+
+      <footer>Health : <a href="/healthz" target="_blank">/healthz</a> — doit répondre <em>ok</em>.</footer>
+    </div>
   </div>
 
-  <div class="row">
-    <label>Pays <select id="country"><option>fr</option><option>be</option><option>ch</option><option>es</option><option>de</option><option>uk</option><option>us</option></select></label>
-    <label>Localisation <input id="location" placeholder="17000 ou 48.85,2.35" value="17000"></label>
-    <label>Store RXXX <input id="store" placeholder="R123" style="width:80px"></label>
-    <button id="go">Rechercher</button>
-  </div>
+  <script>
+    // Bouton thème : Auto → Sombre → Clair (cycle)
+    (function(){
+      const btn = document.getElementById('themeToggle');
+      const label = document.getElementById('themeLabel');
+      function getMode(){
+        const v = document.documentElement.getAttribute('data-theme');
+        return v === 'dark' ? 'dark' : v === 'light' ? 'light' : 'auto';
+      }
+      function setMode(mode){
+        if(mode==='auto'){ document.documentElement.removeAttribute('data-theme'); localStorage.removeItem('theme'); label.textContent='Auto'; }
+        if(mode==='dark'){ document.documentElement.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); label.textContent='Sombre'; }
+        if(mode==='light'){ document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); label.textContent='Clair'; }
+        // meta theme-color pour mobile barre d'adresse
+        const mc = document.querySelector('meta[name="theme-color"]') || (function(){ const m=document.createElement('meta'); m.name='theme-color'; document.head.appendChild(m); return m; })();
+        const isDark = getMode()==='dark' || (getMode()==='auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        mc.setAttribute('content', isDark ? '#0b0f19' : '#fafafa');
+      }
+      btn.addEventListener('click', ()=>{
+        const order = ['auto','dark','light'];
+        const next = order[(order.indexOf(getMode())+1)%order.length];
+        setMode(next);
+      });
+      setMode(getMode()); // init
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ if(getMode()==='auto') setMode('auto'); });
+    })();
+  </script>
 
-  <table>
-    <thead><tr><th>Store</th><th>Ville</th><th>Distance</th><th>SKU</th><th>Dispo</th><th>Quote</th></tr></thead>
-    <tbody id="tbody"></tbody>
-  </table>
-
-  <footer style="margin-top:12px">
-    <a href="/healthz" target="_blank">/healthz</a> | <a href="/__debug" target="_blank">/__debug</a>
-  </footer>
-  <script src="./app.js" type="module"></script>
+  <script src="/app.js" type="module"></script>
 </body>
 </html>
