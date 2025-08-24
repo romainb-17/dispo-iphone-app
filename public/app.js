@@ -3,7 +3,7 @@ const modelSel=$('#model'), colorSel=$('#color'), capSel=$('#capacity');
 const skuSpan=$('#sku'), tb=$('#tbody');
 let MAP={};
 
-async function loadMap(){ try{ const r=await fetch('./skus-fr.json'); MAP=await r.json(); }catch{ MAP={}; } }
+async function loadMap(){ try{ const r=await fetch('./skus-fr.json?v=' + Date.now()); MAP=await r.json(); }catch{ MAP={}; } }
 function setOpts(sel,arr){ sel.innerHTML=''; const ph=document.createElement('option'); ph.value=''; ph.textContent='— choisir —'; sel.appendChild(ph); for(const v of arr){ const o=document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o);} }
 function refreshSku(){ const m=modelSel.value,c=colorSel.value,k=capSel.value; const sku=MAP?.[m]?.[c]?.[k]||null; skuSpan.textContent=sku||'(aucun)'; return sku; }
 function onModel(){ const m=modelSel.value; if(!m||!MAP[m]){ setOpts(colorSel,[]); colorSel.disabled=true; setOpts(capSel,[]); capSel.disabled=true; refreshSku(); return; } setOpts(colorSel,Object.keys(MAP[m])); colorSel.disabled=false; setOpts(capSel,[]); capSel.disabled=true; refreshSku(); }
