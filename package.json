@@ -10,6 +10,7 @@
     "build": "echo no build"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "nodemailer": "^7.0.5"
   }
 }
