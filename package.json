@@ -7,9 +7,13 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "echo no build"
+    "build": "echo no build",
+    "fetch:skus:iphone": "node scripts/fetch-skus-iphone.mjs"
   },
   "dependencies": {
     "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
   }
 }
