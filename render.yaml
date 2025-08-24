@@ -9,3 +9,5 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 18.20.3
+      - key: STATIC_DIR
+        value: public
