@@ -48,6 +48,5 @@
     }
     load(); setInterval(load, 60000);
   </script>
-  <script src="/sku-table-labels.js?v=1756647289" defer></script>
 </body>
 </html>

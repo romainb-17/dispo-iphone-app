@@ -124,7 +124,6 @@
   </script>
 
   <script src="/app.js" type="module"></script>
-  <script defer src="/js/manual-table-fix.js?v=1756646643"></script>
   <script id="SKU_LABEL_PATCH">
 (() => {
   const DATA_URL = '/data/apple_fr_skus.json?v=1756643981';
@@ -187,7 +186,5 @@
   new MutationObserver(m=>m.forEach(x=>x.addedNodes&&x.addedNodes.forEach(n=>n.nodeType===1&&fix(n)))).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
-  <script defer src="/js/manual-dispo-translate.js?v=1756646303"></script>
-  <script src="/sku-table-labels.js?v=1756647289" defer></script>
 </body>
 </html>

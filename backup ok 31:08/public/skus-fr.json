@@ -1,0 +1,15 @@
+{
+  
+  "iPhone 16 Pro": {
+    "Titane Noir":    { "128": "MYND3ZD/A", "256": "MYNH3ZD/A", "512": "MYNM3ZD/A", "1024": "MYNR3ZD/A" },
+    "Titane Désert":  { "128": "MYNF3ZD/A", "256": "MYNK3ZD/A", "512": "MYNP3ZD/A", "1024": "MYNW3ZD/A" },
+    "Titane Naturel": { "128": "MYNG3ZD/A", "256": "MYNL3ZD/A", "512": "MYNQ3ZD/A", "1024": "MYNX3ZD/A" },
+    "Titane Blanc":   { "128": "MYNE3ZD/A", "256": "MYNJ3ZD/A", "512": "MYNN3ZD/A", "1024": "MYNT3ZD/A" }
+  },
+  "iPhone 16 Pro Max": {
+    "Titane Noir":    { "256": "MYWV3ZD/A", "512": "MYX03ZD/A", "1024": "MYX43ZD/A" },
+    "Titane Désert":  { "256": "MYWX3ZD/A", "512": "MYX23ZD/A", "1024": "MYX63ZD/A" },
+    "Titane Naturel": { "256": "MYWY3ZD/A", "512": "MYX33ZD/A", "1024": "MYX73ZD/A" },
+    "Titane Blanc":   { "256": "MYWW3ZD/A", "512": "MYX13ZD/A", "1024": "MYX53ZD/A" }
+  }
+}

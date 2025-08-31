@@ -1,0 +1,191 @@
+// sku-table-labels.js — TABLE ONLY
+// Remplace tout <td> qui contient un SKU (ex: MYND3ZD/A) par "Modèle · Couleur · Capacité"
+// Source: /skus-fr.json (array d'objets OU objet imbriqué)
+(() => {
+  const JSON_URL = "/skus-fr.json";
+  const RE_SKU = /\b[A-Z0-9]{4,}\/[A-Z0-9]\b/i; // capte "MYND3ZD/A"
+
+  function buildMap(d){
+    const map = {};
+    if (!d) return map;
+    if (Array.isArray(d)) {
+      for (const it of d) {
+        const label = `${it.model} · ${it.color} · ${it.capacity}`;
+        (it.partNumber||[]).forEach(p => {
+          if (p) map[String(p).trim()] = label;
+        });
+      }
+    } else if (typeof d === 'object') {
+      for (const m of Object.keys(d)) {
+        const colors = d[m] || {};
+        for (const c of Object.keys(colors)) {
+          const caps = colors[c] || {};
+          for (const cap of Object.keys(caps)) {
+            const pn = caps[cap];
+            if (Array.isArray(pn)) pn.forEach(p => p && (map[String(p).trim()] = `${m} · ${c} · ${cap}`));
+            else if (pn) map[String(pn).trim()] = `${m} · ${c} · ${cap}`;
+          }
+        }
+      }
+    }
+    return map;
+  }
+
+async function ensureMap(){
+  if (Object.keys(MAP).length) return MAP;
+  if (!loading) loading = loadMap();
+  MAP = await loading;
+  return MAP;
+}
+function extractSkuFromText(text){
+    const m = String(text||'').match(RE_SKU);
+    return m ? m[0].toUpperCase() : null;
+  }
+
+  async function patch(root=document){
+    const map = await ensureMap();
+    // Parcourt tous les <td> des tableaux
+    root.querySelectorAll('table tbody td').forEach(td => {
+      // ne pas retraiter si déjà fait
+      if (td.dataset.skuReplaced === '1') return;
+
+      const rawSku = (td.getAttribute('data-raw') || extractSkuFromText(td.textContent));
+      if (!rawSku) return;
+
+      const label = map[rawSku] || map[rawSku.toUpperCase()] || map[rawSku.trim()];
+      if (!label) return;
+
+      // On remplace TOUT le contenu de la cellule par le label
+      td.setAttribute('data-raw', rawSku);
+      td.title = `SKU: ${rawSku}`;
+      // si le td contient des liens/spans, on remplace proprement par du texte simple
+      if (td.textContent.trim() !== label) td.textContent = label;
+
+      td.dataset.skuReplaced = '1';
+    });
+  }
+
+  // premier passage
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => patch());
+  } else {
+    patch();
+  }
+
+  // si la page charge des lignes après coup, on repasse
+  new MutationObserver(ms => {
+    let doit = false;
+    for (const m of ms) {
+      if (m.addedNodes && m.addedNodes.length) { doit = true; break; }
+    }
+    if (doit) patch();
+  }).observe(document.documentElement, { childList:true, subtree:true });
+
+  // utilitaire debug
+  window.__skuMapSize = async () => Object.keys(await ensureMap()).length;
+  window.__skuRelabel = () => patch();
+})();
+
+/* ==== ROBUST JSON LOADER (Safari-friendly) ==== */
+let MAP = {};
+let loading = null;
+
+function buildMap(d){
+  const map = {};
+  if (!d) return map;
+  if (Array.isArray(d)) {
+    for (const it of d) {
+      const label = `${it.model} · ${it.color} · ${it.capacity}`;
+      (it.partNumber || []).forEach(p => { if (p) map[String(p).trim().toUpperCase()] = label; });
+    }
+  } else if (typeof d === "object") {
+    for (const m of Object.keys(d)) {
+      const colors = d[m] || {};
+      for (const c of Object.keys(colors)) {
+        const caps = colors[c] || {};
+        for (const cap of Object.keys(caps)) {
+          const pn = caps[cap];
+          const label = `${m} · ${c} · ${cap}`;
+          if (Array.isArray(pn)) pn.forEach(p => p && (map[String(p).trim().toUpperCase()] = label));
+          else if (pn) map[String(pn).trim().toUpperCase()] = label;
+        }
+      }
+    }
+  }
+  return map;
+}
+
+async function loadSkuMap(){
+  try{
+    const url = new URL(JSON_URL || "/skus-fr.json", location.origin);
+    url.searchParams.set("v", String(Date.now())); // cache-bust
+    const resp = await fetch(url.toString(), { cache: "no-store" });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const text = await resp.text();
+    try {
+      const data = JSON.parse(text);
+      return buildMap(data);
+    } catch (e) {
+      console.error("[SKU_LABEL_PATCH] JSON parse KO:", e);
+      console.debug("[SKU_LABEL_PATCH] HEAD:", text.slice(0, 200));
+      return {};
+    }
+  } catch (e) {
+    console.error("[SKU_LABEL_PATCH] fetch KO:", e);
+    return {};
+  }
+}
+
+async function ensureMap(){
+  if (Object.keys(MAP).length) return MAP;
+  if (!loading) loading = loadMap();
+
+async function ensureMap(){
+  if (Object.keys(MAP).length) return MAP;
+  if (!loading) loading = loadMap();
+  MAP = await loading;
+  return MAP;
+}
+/* ==== END ROBUST JSON LOADER ==== */
+
+
+/* === Added: safe loader if missing === */
+function buildMap(d){
+  const map = {};
+  if (!d) return map;
+  if (Array.isArray(d)) {
+    for (const it of d) {
+      const label = `${it.model} · ${it.color} · ${it.capacity}`;
+      (it.partNumber||[]).forEach(p => { if (p) map[String(p).trim().toUpperCase()] = label; });
+    }
+    return map;
+  }
+  for (const m of Object.keys(d)) {
+    const colors = d[m] || {};
+    for (const c of Object.keys(colors)) {
+      const caps = colors[c] || {};
+      for (const cap of Object.keys(caps)) {
+        const pn = caps[cap];
+        const label = `${m} · ${c} · ${cap}`;
+        if (Array.isArray(pn)) pn.forEach(p => p && (map[String(p).trim().toUpperCase()] = label));
+        else if (pn) map[String(pn).trim().toUpperCase()] = label;
+      }
+    }
+  }
+  return map;
+}
+
+async function loadMap(){
+  try{
+    const src = (typeof DATA_URL!=="undefined" && DATA_URL) || (typeof JSON_URL!=="undefined" && JSON_URL) || "/skus-fr.json";
+    const url = new URL(src, location.origin);
+    url.searchParams.set("v", String(Date.now())); // cache-bust
+    const r = await fetch(url.toString(), { cache: "no-store" });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return buildMap(await r.json());
+  }catch(e){
+    console.warn("[SKU_LABEL_PATCH] loadMap KO", e);
+    return {};
+  }
+}
+/* === End added === */

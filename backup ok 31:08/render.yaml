@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: dispo-iphone-app
+    env: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm ci
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.20.3

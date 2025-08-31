@@ -137,7 +137,7 @@
     }
     return map;
   }
-  function looksLikeSku(s){return !!String(s||'').trim().match(/^[A-Z0-9]{4,}/[A-Z0-9]i);} 
+  function looksLikeSku(s){ return /^[A-Z0-9]{4,}/[A-Z0-9]/i.test(String(s||'').trim()); }/[A-Z0-9]/i.test(String(s||'').trim());}/[A-Z0-9]i);} 
   function findSkuColIndex(table){
     const ths=table.querySelectorAll('thead th');
     for(let i=0;i<ths.length;i++){const t=ths[i].textContent.trim().toLowerCase(); if(['sku','référence','reference','modèle · couleur · capacité'].includes(t)) return i;}
@@ -166,7 +166,7 @@
   const MAP = {
     "MYND3ZD/A": "iPhone 16 Pro · Titane Noir · 128 Go",
   };
-  function looksSku(s){return /^[A-Z0-9]{4,}\/[A-Z0-9]i.test(String(s||"").trim());}
+  function looksSku(s){return /^[A-Z0-9]{4,}\/[A-Z0-9]/i.test(String(s||"").trim());}
   function fix(root=document){
     const tables = root.querySelectorAll("table");
     tables.forEach(t => {
@@ -188,6 +188,7 @@
 })();
 </script>
   <script defer src="/js/manual-dispo-translate.js?v=1756646303"></script>
-  <script src="/sku-table-labels.js?v=1756647289" defer></script>
+  <script src="/sku-table-labels.js?v=1756649212" defer></script>
+  <script src="/journal-status-fr.js?v=1756649212" defer></script>
 </body>
 </html>
