@@ -10,6 +10,8 @@
     "build": "echo no build"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "dotenv": "^17.2.1",
+    "express": "^4.21.2",
+    "morgan": "^1.10.1"
   }
 }

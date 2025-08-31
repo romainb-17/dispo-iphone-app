@@ -1,1 +1,15 @@
-{ "iPhone 16": { "Noir": { "128": "MTUW3ZD/A", "256": "MTUX3ZD/A", "512": "MTUY3ZD/A" }, "Bleu": { "128": "MTUZ3ZD/A", "256": "MTV03ZD/A", "512": "MTV13ZD/A" }, "Rose": { "128": "MTV23ZD/A", "256": "MTV33ZD/A", "512": "MTV43ZD/A" }, "Jaune": { "128": "MTV53ZD/A", "256": "MTV63ZD/A", "512": "MTV73ZD/A" }, "Vert": { "128": "MTV83ZD/A", "256": "MTV93ZD/A", "512": "MTVA3ZD/A" } }, "iPhone 16 Plus": { "Noir": { "128": "MTVB3ZD/A", "256": "MTVC3ZD/A", "512": "MTVD3ZD/A" }, "Bleu": { "128": "MTVE3ZD/A", "256": "MTVF3ZD/A", "512": "MTVG3ZD/A" }, "Rose": { "128": "MTVH3ZD/A", "256": "MTVJ3ZD/A", "512": "MTVK3ZD/A" }, "Jaune": { "128": "MTVL3ZD/A", "256": "MTVM3ZD/A", "512": "MTVN3ZD/A" }, "Vert": { "128": "MTVP3ZD/A", "256": "MTVQ3ZD/A", "512": "MTVR3ZD/A" } }, "iPhone 16 Pro": { "Titane Noir": { "128": "MYND3ZD/A", "256": "MYNH3ZD/A", "512": "MYNM3ZD/A", "1024": "MYNR3ZD/A" }, "Titane Désert": { "128": "MYNF3ZD/A", "256": "MYNK3ZD/A", "512": "MYNP3ZD/A", "1024": "MYNW3ZD/A" }, "Titane Naturel": { "128": "MYNG3ZD/A", "256": "MYNL3ZD/A", "512": "MYNQ3ZD/A", "1024": "MYNX3ZD/A" }, "Titane Blanc": { "128": "MYNE3ZD/A", "256": "MYNJ3ZD/A", "512": "MYNN3ZD/A", "1024": "MYNT3ZD/A" } }, "iPhone 16 Pro Max": { "Titane Noir": { "256": "MYWV3ZD/A", "512": "MYX03ZD/A", "1024": "MYX43ZD/A" }, "Titane Désert": { "256": "MYWX3ZD/A", "512": "MYX23ZD/A", "1024": "MYX63ZD/A" }, "Titane Naturel": { "256": "MYWY3ZD/A", "512": "MYX33ZD/A", "1024": "MYX73ZD/A" }, "Titane Blanc": { "256": "MYWW3ZD/A", "512": "MYX13ZD/A", "1024": "MYX53ZD/A" } } }
+{
+  
+  "iPhone 16 Pro": {
+    "Titane Noir":    { "128": "MYND3ZD/A", "256": "MYNH3ZD/A", "512": "MYNM3ZD/A", "1024": "MYNR3ZD/A" },
+    "Titane Désert":  { "128": "MYNF3ZD/A", "256": "MYNK3ZD/A", "512": "MYNP3ZD/A", "1024": "MYNW3ZD/A" },
+    "Titane Naturel": { "128": "MYNG3ZD/A", "256": "MYNL3ZD/A", "512": "MYNQ3ZD/A", "1024": "MYNX3ZD/A" },
+    "Titane Blanc":   { "128": "MYNE3ZD/A", "256": "MYNJ3ZD/A", "512": "MYNN3ZD/A", "1024": "MYNT3ZD/A" }
+  },
+  "iPhone 16 Pro Max": {
+    "Titane Noir":    { "256": "MYWV3ZD/A", "512": "MYX03ZD/A", "1024": "MYX43ZD/A" },
+    "Titane Désert":  { "256": "MYWX3ZD/A", "512": "MYX23ZD/A", "1024": "MYX63ZD/A" },
+    "Titane Naturel": { "256": "MYWY3ZD/A", "512": "MYX33ZD/A", "1024": "MYX73ZD/A" },
+    "Titane Blanc":   { "256": "MYWW3ZD/A", "512": "MYX13ZD/A", "1024": "MYX53ZD/A" }
+  }
+}
