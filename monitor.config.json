@@ -3,20 +3,192 @@
   "monitors": [
     {
       "country": "fr",
-      "location": "75001",
+      "location": "75001",   // Paris Louvre
       "skus": [
-        "MYE73ZD/A",
-        "MYEE3ZD/A",
-        "MYEF3ZD/A",
-        "MYEG3ZD/A",
-        "MYED3ZD/A",
-        "MYEH3ZD/A",
-        "MYER3ZD/A",
-        "MYND3ZD/A",
-        "MYNH3ZD/A",
-        "MYNM3ZD/A",
-        "MYNE3ZD/A",
-        "MYNL3ZD/A"
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "75009",   // Paris Opéra
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "75008",   // Paris Champs-Élysées
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "69003",   // Lyon Part-Dieu
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "13002",   // Marseille Les Terrasses du Port
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "33000",   // Bordeaux
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "59000",   // Lille
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "67000",   // Strasbourg
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "34000",   // Montpellier Odysseum
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
+      ]
+    },
+    {
+      "country": "fr",
+      "location": "06700",   // Nice Cap 3000
+      "skus": [
+        "MYE73ZD/A","MYE93ZD/A","MYEA3ZD/A","MYED3ZD/A","MYEC3ZD/A",
+        "MXVV3ZD/A","MXVU3ZD/A","MXVW3ZD/A","MXVY3ZD/A","MXVX3ZD/A",
+        "MXWV3ZD/A","MXWN3ZD/A","MXY13ZD/A","MXY53ZD/A","MXY23ZD/A",
+        "MG6L4F/A","MG6T4F/A","MG6M4F/A","MG6U4F/A","MG6J4F/A",
+        "MG6P4F/A","MG6K4F/A","MG6Q4F/A","MG6N4F/A","MG6V4F/A",
+        "MG8J4F/A","MG8N4F/A","MG8R4F/A","MG8H4F/A","MG8M4F/A",
+        "MG8Q4F/A","MG8G4F/A","MG8K4F/A","MG8P4F/A",
+        "MFYP4F/A","MFYU4F/A","MFYX4F/A","MG014F/A",
+        "MFYN4F/A","MFYT4F/A","MFYW4F/A","MG004F/A",
+        "MFYM4F/A","MFYQ4F/A","MFYV4F/A","MFYY4F/A",
+        "MG2M4F/A","MG2T4F/A","MG2X4F/A","MG2L4F/A","MG2Q4F/A",
+        "MG2W4F/A","MG2N4F/A","MG2U4F/A","MG2Y4F/A","MG2P4F/A",
+        "MG2V4F/A","MG304F/A"
       ]
     }
   ]
