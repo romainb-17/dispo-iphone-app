@@ -1,15 +1,44 @@
 {
-  
-  "iPhone 16 Pro": {
-    "Titane Noir":    { "128": "MYND3ZD/A", "256": "MYNH3ZD/A", "512": "MYNM3ZD/A", "1024": "MYNR3ZD/A" },
-    "Titane Désert":  { "128": "MYNF3ZD/A", "256": "MYNK3ZD/A", "512": "MYNP3ZD/A", "1024": "MYNW3ZD/A" },
-    "Titane Naturel": { "128": "MYNG3ZD/A", "256": "MYNL3ZD/A", "512": "MYNQ3ZD/A", "1024": "MYNX3ZD/A" },
-    "Titane Blanc":   { "128": "MYNE3ZD/A", "256": "MYNJ3ZD/A", "512": "MYNN3ZD/A", "1024": "MYNT3ZD/A" }
+  "iPhone 16": {
+    "Blanc":       { "128": "MYE93ZD/A" },
+    "Noir":        { "128": "MYE73ZD/A" },
+    "Rose":        { "128": "MYEA3ZD/A" },
+    "Sarcelle":    { "128": "MYED3ZD/A" },
+    "Outremer":    { "128": "MYEC3ZD/A" }
   },
-  "iPhone 16 Pro Max": {
-    "Titane Noir":    { "256": "MYWV3ZD/A", "512": "MYX03ZD/A", "1024": "MYX43ZD/A" },
-    "Titane Désert":  { "256": "MYWX3ZD/A", "512": "MYX23ZD/A", "1024": "MYX63ZD/A" },
-    "Titane Naturel": { "256": "MYWY3ZD/A", "512": "MYX33ZD/A", "1024": "MYX73ZD/A" },
-    "Titane Blanc":   { "256": "MYWW3ZD/A", "512": "MYX13ZD/A", "1024": "MYX53ZD/A" }
+
+  "iPhone 16 Plus": {
+    "Blanc":       { "128": "MXVV3ZD/A", "256": "MXWV3ZD/A" },
+    "Noir":        { "128": "MXVU3ZD/A", "256": "MXWN3ZD/A" },
+    "Rose":        { "128": "MXVW3ZD/A", "256": "MXY13ZD/A" },
+    "Sarcelle":    { "128": "MXVY3ZD/A", "256": "MXY53ZD/A" },
+    "Outremer":    { "128": "MXVX3ZD/A", "256": "MXY23ZD/A" }
+  },
+
+  "iPhone 17": {
+    "Bleu Brume":  { "256": "MG6L4F/A", "512": "MG6T4F/A" },
+    "Lavande":     { "256": "MG6M4F/A", "512": "MG6U4F/A" },
+    "Noir":        { "256": "MG6J4F/A", "512": "MG6P4F/A" },
+    "Blanc":       { "256": "MG6K4F/A", "512": "MG6Q4F/A" },
+    "Sauge":       { "256": "MG6N4F/A", "512": "MG6V4F/A" }
+  },
+
+  "iPhone 17 Pro": {
+    "Bleu Intense":    { "256": "MG8J4F/A", "512": "MG8N4F/A", "1024": "MG8R4F/A" },
+    "Orange Cosmique": { "256": "MG8H4F/A", "512": "MG8M4F/A", "1024": "MG8Q4F/A" },
+    "Argent":          { "256": "MG8G4F/A", "512": "MG8K4F/A", "1024": "MG8P4F/A" }
+  },
+
+  "iPhone 17 Pro Max": {
+    "Bleu Intense":    { "256": "MFYP4F/A", "512": "MFYU4F/A", "1024": "MFYX4F/A", "2048": "MG014F/A" },
+    "Orange Cosmique": { "256": "MFYN4F/A", "512": "MFYT4F/A", "1024": "MFYW4F/A", "2048": "MG004F/A" },
+    "Argent":          { "256": "MFYM4F/A", "512": "MFYQ4F/A", "1024": "MFYV4F/A", "2048": "MFYY4F/A" }
+  },
+
+  "iPhone Air": {
+    "Blanc Nuage":  { "256": "MG2M4F/A", "512": "MG2T4F/A", "1024": "MG2X4F/A" },
+    "Noir Sidéral": { "256": "MG2L4F/A", "512": "MG2Q4F/A", "1024": "MG2W4F/A" },
+    "Or Clair":     { "256": "MG2N4F/A", "512": "MG2U4F/A", "1024": "MG2Y4F/A" },
+    "Bleu Ciel":    { "256": "MG2P4F/A", "512": "MG2V4F/A", "1024": "MG304F/A" }
   }
 }
